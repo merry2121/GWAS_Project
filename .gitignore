@@ -1,0 +1,23 @@
+# Large raw genomic data
+data/*.vcf.gz
+data/*.vcf.gz.tbi
+
+# Large processed genomic data
+results/*.bcf
+results/*.bcf.csi
+results/*.bed
+results/*.bim
+results/*.fam
+
+# Temporary PLINK files
+results/*.nosex
+results/*.log
+
+# Keep important text results
+!results/*.frq
+!results/*.eigenval
+!results/*.eigenvec
+!results/*.prune.in
+!results/*.prune.out
+!results/*.txt
+!results/*.png
