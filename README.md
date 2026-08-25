@@ -1,71 +1,96 @@
-# 1000 Genomes PCA Analysis
+# GWAS Analysis Project
+
+**Author:** Meron Kidane
+**GitHub:** merry2121
 
 ## Overview
 
-This project uses chromosome 1 data from the 1000 Genomes Project to perform quality control, variant filtering, LD pruning, Principal Component Analysis (PCA), and population visualization.
+This project performs genotype quality control and population-structure analysis using genotype data from the **1000 Genomes Project Phase 3**.
 
-## Dataset
+The analysis was performed using **WSL Ubuntu, bcftools, PLINK 1.9, Python, and Matplotlib**.
 
-The data comes from the 1000 Genomes Project Phase 3 dataset.
+Two chromosomes were analyzed:
 
-- 2504 individuals
-- Chromosome 1 genotype data
-- Population and super-population information
-- Reference genome: GRCh37 / hg19
-- Strict accessibility mask
+* **Chromosome 1** — initial analysis and PCA
+* **Chromosome 22** — dedicated analysis requested for the project
 
-## Analysis Steps
+## Analysis Pipeline
 
-1. Downloaded chromosome 1 VCF data from the 1000 Genomes Project.
-2. Normalized variants and removed duplicate variants using BCFtools.
-3. Converted the processed data to PLINK binary format.
-4. Applied the 1000 Genomes strict mask to keep variants in callable regions.
-5. Applied MAF filtering.
-6. Performed LD pruning to reduce highly correlated SNPs.
-7. Used the remaining SNPs to perform PCA with PLINK.
-8. Calculated the variance explained by the principal components.
-9. Added population and super-population information to the PCA results.
-10. Created a PC1 vs PC2 population plot using Python.
+The general workflow was:
 
-## Results
-
-After applying the strict mask:
-
-- 739,129 variants remained.
-- 2,504 individuals were retained.
-
-After LD pruning:
-
-- Approximately 71,000 independent SNPs were used for PCA.
-
-The first principal components explained:
-
-- PC1: 53.49%
-- PC2: 20.99%
-- PC3: 9.04%
-- PC4: 6.75%
-- PC5: 3.06%
-
-The PCA shows clear genetic structure among the major 1000 Genomes super-populations.
-
-## Tools
-
-- Linux / WSL
-- BCFtools
-- PLINK 1.9
-- Python
-- Matplotlib
-- Git / GitHub
+1. Obtain chromosome-specific VCF genotype data
+2. Validate and normalize variants using `bcftools`
+3. Convert genotype data to PLINK binary format
+4. Apply strict-region masking
+5. Keep SNP variants
+6. Calculate allele frequencies
+7. Apply Minor Allele Frequency (MAF) filtering
+8. Perform Linkage Disequilibrium (LD) pruning
+9. Perform Principal Component Analysis (PCA)
+10. Visualize the PCA results
 
 ## Project Structure
 
+```text
 GWAS_Project/
+│
+├── chromosome_1/
+│   ├── README.md
+│   └── results/
+│
+├── chromosome_22/
+│   ├── README.md
+│   └── results/
+│
+├── scripts/
 ├── data/
 ├── reference/
-├── results/
-├── scripts/
-│   └── plot_pca.py
-├── .gitignore
 └── README.md
+```
 
-Large genomic data files and intermediate files are excluded from Git using .gitignore.
+## Chromosome 1
+
+The chromosome 1 analysis includes genotype quality control, missingness analysis, LD pruning, and PCA.
+
+See the complete chromosome 1 results here:
+
+**[Chromosome 1 Analysis](chromosome_1/)**
+
+## Chromosome 22
+
+The chromosome 22 analysis follows the same general GWAS preprocessing workflow and was performed using chromosome 22 genotype data.
+
+Key results:
+
+* 2,504 individuals
+* 1,104,364 initial variants
+* 749,426 variants after strict-mask filtering
+* 726,054 SNP variants
+* 45,608 variants after MAF ≥ 0.1 filtering
+* 3,444 variants retained after LD pruning
+* PCA performed using the 3,444 LD-pruned variants
+
+The first two principal components explained approximately **78.05%** of the variation captured by the first 10 principal components.
+
+See the complete chromosome 22 analysis here:
+
+**[Chromosome 22 Analysis](chromosome_22/)**
+
+## Software and Tools
+
+* **bcftools 1.19** — VCF/BCF processing and variant normalization
+* **PLINK 1.9** — genotype quality control, filtering, LD pruning, and PCA
+* **Python 3** — data processing and visualization
+* **Matplotlib** — PCA visualization
+* **WSL Ubuntu** — Linux environment on Windows
+
+## Data
+
+The genotype data used in this project comes from the **1000 Genomes Project Phase 3**.
+
+Large raw genotype files and reference genome files are kept locally and are not uploaded to this repository because of their large file sizes.
+
+## Purpose
+
+The purpose of this project is to demonstrate a practical GWAS preprocessing workflow, including genotype quality control, allele-frequency filtering, LD pruning, and population-structure analysis using PCA.
+
