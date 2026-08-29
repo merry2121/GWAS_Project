@@ -7,7 +7,6 @@ This folder contains the results of a GWAS preprocessing and Principal Component
 
 The analysis was performed using WSL Ubuntu, bcftools, and PLINK 1.9.
 
-Dataset
 Dataset: 1000 Genomes Project Phase 3
 Chromosome: 22
 Individuals: 2,504
@@ -38,6 +37,7 @@ PCA was performed using the 3,444 LD-pruned variants from 2,504 individuals.
 The first 10 principal components explained:
 
 Principal Component	Variance Explained
+
 PC1	53.62%
 PC2	24.43%
 PC3	7.64%
@@ -51,12 +51,19 @@ PC10	1.18%
 PC1 and PC2 together explain approximately 78.05% of the variation captured by the first 10 PCs.
 
 Output Files
+
 chr22_ld.prune.in — variants retained after LD pruning
+
 chr22_ld.prune.out — variants removed during LD pruning
+
 chr22_pca.eigenval — eigenvalues from PCA
+
 chr22_pca.eigenvec — individual PCA coordinates
+
 chr22_strict_mask_range.txt — chromosome 22 strict-mask regions
+
 Tools
+
 WSL Ubuntu
 bcftools 1.19
 PLINK 1.9
